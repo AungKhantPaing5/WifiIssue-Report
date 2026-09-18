@@ -204,7 +204,16 @@ function AdminPanel({ session }: { session: Session }) {
               </div>
 
               <div ref={tableRef} className="overflow-x-auto bg-card">
-                <table className="w-full min-w-[960px] text-left text-sm">
+                <table className="w-full min-w-[1180px] table-fixed text-left text-sm">
+                  <colgroup>
+                    <col className="w-[150px]" />
+                    <col className="w-[210px]" />
+                    <col className="w-[190px]" />
+                    <col />
+                    <col className="w-[130px]" />
+                    <col className="w-[190px]" />
+                    <col className="w-[230px]" />
+                  </colgroup>
                   <thead>
                     <tr className="bg-muted/60 text-xs uppercase tracking-wider text-muted-foreground">
                       <Th>Ticket / Time</Th>
@@ -267,9 +276,9 @@ function Row({ r, onOpen }: { r: Report; onOpen: (src: string, title: string) =>
         <p>{r.building}</p>
         <p className="text-xs text-muted-foreground">Room {r.room}</p>
       </td>
-      <td className="max-w-xs px-4 py-3">
+      <td className="px-4 py-3">
         <p className="font-myanmar font-semibold">{issueLabel(r.issueType)}</p>
-        <p className="font-myanmar mt-0.5 text-xs text-muted-foreground" title={r.description}>
+        <p className="font-myanmar mt-0.5 line-clamp-3 text-xs text-muted-foreground" title={r.description}>
           {r.description}
         </p>
       </td>
