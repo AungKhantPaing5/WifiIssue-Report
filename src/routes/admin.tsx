@@ -23,7 +23,8 @@ import {
   type Session,
   type Status,
 } from "@/lib/portal-store";
-import { Avatar, Brand, ChatPanel, Heading, Lightbox, LogoutButton, StatusBadge, Thumb, useRequireRole } from "@/components/portal/shared";
+import { Avatar, Brand, ChatPanel, Heading, Lightbox, LogoutButton, StatusBadge, Thumb } from "@/components/portal/shared";
+import { AdminLogin } from "@/components/portal/admin-login";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
@@ -157,11 +158,11 @@ function AdminPanel({ session }: { session: Session }) {
             </div>
           </div>
           <div className="mt-3">
-            <LogoutButton dark />
+            <LogoutButton dark to="/admin" />
           </div>
         </div>
         <div className="lg:hidden">
-          <LogoutButton dark />
+          <LogoutButton dark to="/admin" />
         </div>
       </aside>
 
