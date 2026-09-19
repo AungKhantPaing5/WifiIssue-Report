@@ -36,14 +36,14 @@ function LoginPage() {
     // Simulated OAuth handshake
     setTimeout(() => {
       const domain = provider === "google" ? "gmail.com" : "outlook.com";
-      const slug = (role === "admin" ? "it.admin" : name).toLowerCase().replace(/[^a-z0-9]+/g, ".").replace(/^\.|\.$/g, "");
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, ".").replace(/^\.|\.$/g, "");
       portal.login({
-        role,
+        role: "student",
         provider,
-        name: role === "admin" ? "IT Support Admin" : name.trim() || "Student",
+        name: name.trim() || "Student",
         email: `${slug || "user"}@${domain}`,
-        studentId: role === "admin" ? "ADMIN" : studentId.trim() || "STU-0000",
-        major: role === "admin" ? "Network Operations" : major,
+        studentId: studentId.trim() || "STU-0000",
+        major,
       });
       setBusy(null);
     }, 700);
@@ -79,35 +79,31 @@ function LoginPage() {
             <Brand />
           </div>
 
-          {/* Role toggle */}
-          <div className="grid grid-cols-2 rounded-xl bg-muted p-1" role="tablist">
-            <RoleTab active={role === "student"} onClick={() => setRole("student")} icon={GraduationCap} my="ကျောင်းသား" en="Student Portal" />
-            <RoleTab active={role === "admin"} onClick={() => setRole("admin")} icon={ShieldCheck} my="စီမံခန့်ခွဲသူ" en="Admin Panel" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-xs font-semibold text-muted-foreground">
+            <GraduationCap className="size-4" />
+            <span className="font-myanmar">ကျောင်းသား ပေါ်တယ်</span>
+            <span className="opacity-70">· Student Portal</span>
           </div>
 
           <div className="surface-card mt-5 p-7">
-            <h2 className="font-myanmar text-2xl font-bold">
-              {role === "student" ? "ကျောင်းသား အကောင့်ဖြင့် ဝင်ရန်" : "Admin အကောင့်ဖြင့် ဝင်ရန်"}
-            </h2>
+            <h2 className="font-myanmar text-2xl font-bold">ကျောင်းသား အကောင့်ဖြင့် ဝင်ရန်</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              {role === "student" ? "Sign in with your campus account to report issues." : "Sign in to manage tickets and reply to students."}
+              Sign in with your campus account to report issues.
             </p>
 
-            {role === "student" && (
-              <div className="mt-6 space-y-4">
-                <Field label="အမည် · Full name">
-                  <input className="field" value={name} onChange={(e) => setName(e.target.value)} />
+            <div className="mt-6 space-y-4">
+              <Field label="အမည် · Full name">
+                <input className="field" value={name} onChange={(e) => setName(e.target.value)} />
+              </Field>
+              <div className="grid grid-cols-2 gap-3">
+                <Field label="ကျောင်းသား ID · Student ID">
+                  <input className="field font-mono" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
                 </Field>
-                <div className="grid grid-cols-2 gap-3">
-                  <Field label="ကျောင်းသား ID · Student ID">
-                    <input className="field font-mono" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
-                  </Field>
-                  <Field label="မေဂျာ · Major">
-                    <input className="field" value={major} onChange={(e) => setMajor(e.target.value)} />
-                  </Field>
-                </div>
+                <Field label="မေဂျာ · Major">
+                  <input className="field" value={major} onChange={(e) => setMajor(e.target.value)} />
+                </Field>
               </div>
-            )}
+            </div>
 
             <div className="mt-6 space-y-3">
               <ProviderButton provider="google" busy={busy} onClick={() => signIn("google")} />
