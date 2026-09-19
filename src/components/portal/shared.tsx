@@ -201,13 +201,13 @@ export function useRequireRole(role: Role): Session | null {
   return session && session.role === role ? session : null;
 }
 
-export function LogoutButton({ dark = false }: { dark?: boolean }) {
+export function LogoutButton({ dark = false, to = "/" }: { dark?: boolean; to?: "/" | "/admin" }) {
   const navigate = useNavigate();
   return (
     <button
       onClick={() => {
         portal.logout();
-        navigate({ to: "/", replace: true });
+        navigate({ to, replace: true });
       }}
       className={cn(
         "inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition",
