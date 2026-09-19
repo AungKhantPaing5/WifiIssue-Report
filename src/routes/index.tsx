@@ -22,7 +22,6 @@ export const Route = createFileRoute("/")({
 function LoginPage() {
   const { session } = usePortalState();
   const navigate = useNavigate();
-  const [role, setRole] = useState<Role>("student");
   const [name, setName] = useState("Aung Khant Paing");
   const [studentId, setStudentId] = useState("IT-2024-0187");
   const [major, setMajor] = useState("Information Technology");
