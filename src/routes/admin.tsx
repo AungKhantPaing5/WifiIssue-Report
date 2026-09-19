@@ -42,8 +42,8 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminPage() {
-  const session = useRequireRole("admin");
-  if (!session) return null;
+  const { session } = usePortalState();
+  if (!session || session.role !== "admin") return <AdminLogin />;
   return <AdminPanel session={session} />;
 }
 
