@@ -1,9 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { GraduationCap, ShieldCheck, Wifi, Gauge, MessageSquare, FileSpreadsheet } from "lucide-react";
-import { portal, usePortalState, type Provider, type Role } from "@/lib/portal-store";
+import { GraduationCap, Wifi, Gauge, MessageSquare, FileSpreadsheet } from "lucide-react";
+import { portal, usePortalState, type Provider } from "@/lib/portal-store";
 import { Brand } from "@/components/portal/shared";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -130,25 +129,6 @@ function Feature({ icon: Icon, my, en }: { icon: typeof Wifi; my: string; en: st
   );
 }
 
-function RoleTab({ active, onClick, icon: Icon, my, en }: { active: boolean; onClick: () => void; icon: typeof Wifi; my: string; en: string }) {
-  return (
-    <button
-      role="tab"
-      aria-selected={active}
-      onClick={onClick}
-      className={cn(
-        "flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm transition",
-        active ? "bg-card font-semibold shadow-card" : "text-muted-foreground hover:text-foreground",
-      )}
-    >
-      <Icon className="size-4" />
-      <span>
-        <span className="font-myanmar">{my}</span>
-        <span className="ml-1 hidden text-xs opacity-60 sm:inline">{en}</span>
-      </span>
-    </button>
-  );
-}
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
